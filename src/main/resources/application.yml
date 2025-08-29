@@ -7,3 +7,6 @@ spring:
 mybatis:
   mapper-locations: classpath:mybatis/mapper/**/*.xml #XML ?? ?? ?? ??
   type-aliases-package: com.back.domain.**.dto # resultType ??? ??
+logging:
+  level:
+    com.back: debug
