@@ -24,4 +24,10 @@ public class PostController {
         model.addAttribute("id", id);
         return "post/post/detail";
     }
+
+    @GetMapping("/write")
+    public String write() {
+
+        return "post/post/write";
+    }
 }
