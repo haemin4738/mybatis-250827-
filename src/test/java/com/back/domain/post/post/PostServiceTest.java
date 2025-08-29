@@ -217,4 +217,15 @@ public class PostServiceTest {
         assertThat(post.getAuthorName()).isEqualTo("유저1");
         assertThat(post.getMemberId()).isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("작성자 이름으로 검색")
+    void t16() {
+        // when
+        List<Post> posts = postService.searchWithAuthorName("author", "유저1");
+        // then
+        assertThat(posts).hasSize(1);
+        assertThat(posts.get(0).getAuthorName()).isEqualTo("유저1");
+        assertThat(posts.get(0).getTitle()).isEqualTo("제목 1");
+    }
 }

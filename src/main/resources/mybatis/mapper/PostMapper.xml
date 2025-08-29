@@ -132,4 +132,41 @@
         </foreach>
     </delete>
 
+    <!-- 게시물 검색 -->
+    <select id="searchWithAuthorName" resultType="Post">
+        SELECT
+        P.id,
+        P.title,
+        P.content,
+        P.createDate,
+        P.modifyDate,
+        P.memberId,
+        M.name as authorName
+        FROM post P
+        LEFT JOIN member M
+        ON P.memberId = M.id
+        <where>
+            <choose>
+                <when test="kwType == 'title'">
+                    title LIKE CONCAT('%', #{kw}, '%')
+                </when>
+                <when test="kwType == 'content'">
+                    content LIKE CONCAT('%', #{kw}, '%')
+                </when>
+                <when test="kwType == 'author'">
+                    M.name LIKE CONCAT('%', #{kw}, '%')
+                </when>
+                <otherwise>
+                    (
+                    title LIKE CONCAT('%', #{kw}, '%')
+                    OR
+                    content LIKE CONCAT('%', #{kw}, '%')
+                    OR
+                    M.name LIKE CONCAT('%', #{kw}, '%')
+                    )
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
 </mapper>
