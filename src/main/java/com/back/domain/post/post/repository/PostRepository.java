@@ -42,4 +42,6 @@ public interface PostRepository {
     );
 
     int deleteByIds(@Param("ids") List<Integer> ids);
+
+    Post findByIdWithAuthorName(int id);
 }

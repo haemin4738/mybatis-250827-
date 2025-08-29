@@ -13,4 +13,6 @@ public class Post {
 
     private LocalDateTime createDate;
     private LocalDateTime modifyDate;
+
+    private String authorName;
 }
