@@ -51,4 +51,12 @@ public class MemberService {
     public List<Member> search(String kwType, String kw) {
         return memberRepository.search(kwType, kw);
     }
+
+    public int deleteByIds(List<Integer> ids) {
+        if (ids == null || ids.isEmpty()) {
+            return 0;
+        }
+
+        return memberRepository.deleteByIds(ids);
+    }
 }
