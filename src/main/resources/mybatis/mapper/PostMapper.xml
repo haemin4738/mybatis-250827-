@@ -39,6 +39,7 @@
         INSERT INTO post
         SET createDate = NOW(),
             modifyDate = NOW(),
+            memberId=#{memberId},
             title = #{title},
             content = #{content}
     </insert>

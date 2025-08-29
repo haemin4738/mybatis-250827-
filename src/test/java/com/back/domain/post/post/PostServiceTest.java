@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Transactional
 @ActiveProfiles("test")
 @SpringBootTest
-public class PostServiceTest {
+public class postServiceTests {
     @Autowired
     private PostService postService;
 
@@ -42,12 +42,13 @@ public class PostServiceTest {
     @DisplayName("게시물 생성")
     void t3 () {
         // when: 게시글 작성
-        int id = postService.create("제목 3", "내용 3");
+        int id = postService.create("제목 3", "내용 3", 2);
         // then: 해당 id의 게시글 불러오기
         Post post = postService.findById(id);
 
         assertThat(post.getTitle()).isEqualTo("제목 3");
         assertThat(post.getContent()).isEqualTo("내용 3");
+        assertThat(post.getMemberId()).isEqualTo(2);
     }
 
     @Test
@@ -161,7 +162,7 @@ public class PostServiceTest {
     @Test
     @DisplayName("정렬된 게시물 조회 - 생성일 내림차순")
     void t12() {
-        postService.create("제목 0", "내용 0");
+        postService.create("제목 0", "내용 0", 1);
         List<Post> posts = postService.findAllOrdered("createDate", "desc");
         assertThat(posts).hasSize(3);
 
@@ -191,8 +192,8 @@ public class PostServiceTest {
     @DisplayName("다중 게시물 삭제")
     void t14() {
         // given: 추가 게시물 생성
-        int id3 = postService.create("제목 3", "내용 3");
-        int id4 = postService.create("제목 4", "내용 4");
+        int id3 = postService.create("제목 3", "내용 3", 1);
+        int id4 = postService.create("제목 4", "내용 4", 2);
         List<Post> addPosts = postService.findAll();
         assertThat(addPosts).hasSize(4); // 기존 + 추가 4개
 

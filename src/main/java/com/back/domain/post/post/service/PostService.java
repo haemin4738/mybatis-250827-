@@ -23,10 +23,11 @@ public class PostService {
         return postRepository.findById(id);
     }
 
-    public int create(String title, String content) {
+    public int create(String title, String content, int memberId) {
         Post post = new Post();
         post.setTitle(title);
         post.setContent(content);
+        post.setMemberId(memberId);
 
         postRepository.create(post);
         return post.getId();
