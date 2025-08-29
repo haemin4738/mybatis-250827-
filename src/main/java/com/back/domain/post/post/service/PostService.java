@@ -33,8 +33,8 @@ public class PostService {
         return post.getId();
     }
 
-    public void createV2(String title, String content) {
-        postRepository.createV2(title, content);
+    public void createVoid(String title, String content, int memberId) {
+        postRepository.createVoid(title, content, memberId);
     }
 
     public int getLastInsertId() {

@@ -45,12 +45,13 @@
     </insert>
 
     <!-- 게시물 생성 V2 -->
-    <insert id="createV2">
+    <insert id="createVoid">
         INSERT INTO post
         SET createDate = NOW(),
             modifyDate = NOW(),
             title = #{title},
-            content = #{content}
+            content = #{content},
+            memberId = #{memberId}
     </insert>
 
     <!-- 마지막 INSERT ID 조회 -->

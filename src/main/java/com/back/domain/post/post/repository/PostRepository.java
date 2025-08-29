@@ -20,9 +20,10 @@ public interface PostRepository {
 
     int create(Post post);
 
-    void createV2(
+    void createVoid(
             @Param("title") String title,
-            @Param("content") String content
+            @Param("content") String content,
+            @Param("memberId") int memberId
     );
 
     int getLastInsertId();

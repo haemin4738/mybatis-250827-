@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Transactional
 @ActiveProfiles("test")
 @SpringBootTest
-public class postServiceTests {
+public class PostServiceTest {
     @Autowired
     private PostService postService;
 
@@ -55,7 +55,7 @@ public class postServiceTests {
     @DisplayName("게시물 생성")
     void t4 () {
         // when: 게시글 작성
-        postService.createV2("제목 3", "내용 3");
+        postService.createVoid("제목 3", "내용 3", 2);
         // then: 해당 id의 게시글 불러오기
         int id = postService.getLastInsertId();
         Post post = postService.findById(id);
