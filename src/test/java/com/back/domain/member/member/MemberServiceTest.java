@@ -152,4 +152,22 @@ public class MemberServiceTest {
         members = memberService.search("", "test.com");
         assertThat(members).hasSize(2);
     }
+
+    @Test
+    @DisplayName("다중 회원 삭제")
+    void t12() {
+        // given: 추가 회원 생성
+        int id3 = memberService.create("user3", "{noop}1234", "유저3", "user3@test.com");
+        int id4 = memberService.create("user4", "{noop}1234", "유저4", "user4@test.com");
+        List<Member> addMembers = memberService.findAll();
+        assertThat(addMembers).hasSize(4); // 기존 2명 + 추가 2명 = 4명
+
+        // when: 다중 삭제
+        int deletedCount = memberService.deleteByIds(Arrays.asList(id3, id4));
+        assertThat(deletedCount).isEqualTo(2);
+
+        // then: 삭제 확인
+        List<Member> members = memberService.findAll();
+        assertThat(members).hasSize(2); // 기존 2명만 남음
+    }
 }
