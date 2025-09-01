@@ -42,7 +42,7 @@ SET createDate = now(),
 modifyDate = now(),
 username = 'user1',
 `name` = '유저1',
-`password`= '{noop}1234',
+`password`= 'noop1234',
 email = 'user1@test.com';
 
 INSERT INTO `member`
@@ -50,5 +50,5 @@ SET createDate = now(),
 modifyDate = now(),
 username = 'user2',
 `name` = '유저2',
-`password`= '{noop}1234',
+`password`= 'noop1234',
 email = 'user2@test.com';

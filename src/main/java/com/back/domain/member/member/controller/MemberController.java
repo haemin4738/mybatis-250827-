@@ -1,10 +1,14 @@
 package com.back.domain.member.member.controller;
 
+import com.back.domain.member.member.dto.Member;
 import com.back.domain.member.member.service.MemberService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @RequiredArgsConstructor
 @RequestMapping("/members")
@@ -12,8 +16,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
     private final MemberService memberService;
 
-    @GetMapping("login")
-    public String login(){
+    @GetMapping("/login")
+    public  String showLogin(){
         return "member/member/login";
+    }
+
+    @PostMapping("/login")
+    @ResponseBody
+    public String login(String username, String password, HttpSession session){
+        Member member = memberService.findByUsername(username);
+
+        // TODO: 존재하는 회원인지 검증
+
+        // TODO: 비밀번호 일치 여부 검증
+
+        session.setAttribute("loginedMemerId", member.getId());
+
+        return "로그인 처리";
+    }
+
+    @GetMapping("/logout")
+    @ResponseBody
+    public String logout(HttpSession session) {
+        session.removeAttribute("loginedMemerId");
+
+        return "로그아웃 처리";
     }
 }
