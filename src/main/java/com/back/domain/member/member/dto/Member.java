@@ -14,4 +14,8 @@ public class Member {
 
     private LocalDateTime createDate;
     private LocalDateTime modifyDate;
+
+    public boolean matchPassword(String password) {
+        return this.password.substring("{noop}".length()).equals(password);
+    }
 }

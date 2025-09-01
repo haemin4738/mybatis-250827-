@@ -26,9 +26,15 @@ public class MemberController {
     public String login(String username, String password, HttpSession session){
         Member member = memberService.findByUsername(username);
 
-        // TODO: 존재하는 회원인지 검증
+        // 존재하는 회원인지 검증
+        if (member == null) {
+            return "존재하지 않는 회원입니다.";
+        }
 
-        // TODO: 비밀번호 일치 여부 검증
+        // 비밀번호 일치 여부 검증
+        if (!member.matchPassword(password)) {
+            return "비밀번호가 일치 하지 않습니다.";
+        }
 
         session.setAttribute("loginedMemerId", member.getId());
 
