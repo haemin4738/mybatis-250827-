@@ -2,7 +2,7 @@ package com.back.domain.member.member.controller;
 
 import com.back.domain.member.member.dto.Member;
 import com.back.domain.member.member.service.MemberService;
-import com.back.global.rq.Rq;
+import com.back.global.Rq.Rq;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

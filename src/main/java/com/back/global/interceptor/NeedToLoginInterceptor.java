@@ -1,7 +1,7 @@
 
 package com.back.global.interceptor;
 
-import com.back.global.rq.Rq;
+import com.back.global.Rq.Rq;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
