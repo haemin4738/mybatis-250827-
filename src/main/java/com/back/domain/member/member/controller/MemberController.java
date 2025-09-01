@@ -3,7 +3,6 @@ package com.back.domain.member.member.controller;
 import com.back.domain.member.member.dto.Member;
 import com.back.domain.member.member.service.MemberService;
 import com.back.global.rq.Rq;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +24,7 @@ public class MemberController {
 
     @PostMapping("/login")
     @ResponseBody
-    public String login(String username, String password, HttpSession session){
+    public String login(String username, String password){
         Member member = memberService.findByUsername(username);
 
         // 존재하는 회원인지 검증
@@ -38,18 +37,22 @@ public class MemberController {
             return "비밀번호가 일치 하지 않습니다.";
         }
 
-        rq.setName(member.getName());
-        session.setAttribute("loginedMemerId", member.getId());
+        rq.setLoginDone(member);
 
         return "로그인 처리";
     }
 
     @GetMapping("/logout")
     @ResponseBody
-    public String logout(HttpSession session) {
-        rq.setName("로그아웃됨");
-        session.removeAttribute("loginedMemerId");
+    public String logout() {
+        rq.setLogoutDone();
 
         return "로그아웃 처리";
+    }
+
+    @GetMapping("/me")
+    @ResponseBody
+    public Member me() {
+        return rq.getLoginedMember();
     }
 }
